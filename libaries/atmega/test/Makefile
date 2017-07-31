@@ -22,13 +22,14 @@ EXE_NAME                   = test_atmega
 SRC_C                      = ./test/test_uart.c
 SRC_CPP                    = 
 
-LIBS                       = -l :CircularBuffer.a \
-                             -l :lib_atmega.a
+LIBS                       = -l:lib_atmega.a \
+                             -l:CircularBuffer.a
+
 OUTPUT_MAP_FILE            = output.map
 OBJCOPY                    = avr-objcopy
 
 #--------------------------Directories------------------------------------------
-INC_DIR                     = -I $(CIRCULAR_BUFFERS_DIR) \
+INC_DIR                     = -I $(CIRCULAR_BUFFERS_DIR)\
                               -I $(HW_ATMEGA_DIR)/inc
 
 OBJ_DIR                     = ./obj
@@ -62,14 +63,14 @@ PRE_PROCESSED_FILES         := $(addprefix $(PRE_DIR)/, $(PRE_PROCESSED_FILES))
 VPATH                       := $(SRC_DIR)
 
 #-------------------------Compiler options--------------------------------------
-CC                          = avr-g++
+CC                          = avr-gcc
 CFLAGS                      = -c -Wall $(INC_DIR) -g -Os -mmcu=$(MCU)
 LFLAGS                      =  -Wall -Xlinker -Map=$(OUTPUT_MAP_FILE) -o
 PRE_PROCESSOR_OPTIONS       = -E -dM $(INC_DIR)
 
 
 #------------------------------------------------------------------------------
-all: $(OBJ_DIR) $(PRE_DIR) $(BIN_DIR) $(EXE_NAME).hex
+all: $(OBJ_DIR) $(PREDIR) $(BIN_DIR) $(EXE_NAME).hex
 
 $(OBJ_DIR):
 		$(MKDIR) $(OBJ_DIR)
