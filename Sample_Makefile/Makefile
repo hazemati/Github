@@ -32,9 +32,9 @@ PRE_DIR                     = ./pre
 #-------------------------Compiler options--------------------------------------
 CC                          = gcc
 CXX                         = g++
-CFLAGS                      = -c -Wall $(INC_DIR) 
+CFLAGS                      = -c -Wall $(INC_DIR) -pthread
 CXXFLAGS                    = -c $(INC_DIR)
-LFLAGS                      =  -Wall -Xlinker -Map=$(OUTPUT_MAP_FILE) -o 
+LFLAGS                      =  -Wall -Xlinker -Map=$(OUTPUT_MAP_FILE) -pthread -o 
 
 PRE_PROCESSOR_OPTIONS       = -E -dM $(INC_DIR)
 

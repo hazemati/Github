@@ -21,9 +21,9 @@ BITCLOCK                   = 1
 ARCHIVE_NAME               = lib_atmega.a
 SRC_C                      = 
 
-SRC_CPP                    = ./src/hw_uart_atmega.cpp
+SRC_CPP                    = ./src/hw_uart_atmega328.cpp
 OUTPUT_MAP_FILE            = output.map
-LIBS                       = CircularBuffer.a
+#LIBS                       = CircularBuffer.a
 
 
 #--------------------------Directories------------------------------------------
@@ -32,9 +32,8 @@ INC_DIR                     = -I ./inc \
 OBJ_DIR                     = ./obj
 BIN_DIR                     = ./bin
 PRE_DIR                     = ./pre
-LIB_DIR                     = $(CIRCULAR_BUFFERS_DIR)/lib/ \
-                             $(ATMEGA_HW_DIR)/
-
+LIB_DIR                     = $(ATMEGA_HW_DIR)/
+#                             $(CIRCULAR_BUFFERS_DIR)/lib/
 
 #-------------------------Used Commands-----------------------------------------
 MKDIR                       = mkdir -p
@@ -63,7 +62,7 @@ VPATH                       := $(SRC_DIR)
 #-------------------------Compiler options--------------------------------------
 CC                          = avr-gcc
 CPP                         = avr-g++
-CFLAGS                      = -c -Wall $(INC_DIR) -g -Os -mmcu=$(MCU)
+CFLAGS                      = -c -Wall $(INC_DIR) -g -Os -mmcu=$(MCU) -t
 PRE_PROCESSOR_OPTIONS       = -E -dM $(INC_DIR)
 ARCHIVE                     = avr-ar rcs
 
@@ -80,7 +79,7 @@ $(BIN_DIR):
 # Link the files
 # create the preprocesssed files and object files prior to calling the linker
 $(ARCHIVE_NAME): $(OBJ)
-		$(ARCHIVE) $(ARCHIVE_NAME) $(LIB_DIR) $(LIBS) $(OBJ) 
+		$(ARCHIVE) $(ARCHIVE_NAME) $(LIB_DIR) $(LIBS) $(OBJ)
  
 #Compile the .c and .cpp files 
 $(OBJ_DIR)/%.o: %.c

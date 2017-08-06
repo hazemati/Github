@@ -13,21 +13,22 @@ Uart initialize_uart_struct()
 {
     Uart uart;
     uart.parity = NoParity;
+    uart.mode = Asyncronous;
+    uart.flow_control = NoFlowControl;
     uart.stop_bit = 1; 
     uart.char_size = 8;
-    uart.baud_rate = 9600;
+    uart.baud_rate = 57600;
+    uart.buffer_size = 5;
     return uart;
 }
 
 int main(void)
 {
     Uart uart = initialize_uart_struct();
-    CreateAtmegaUart(&uart, 1);
-
-    atmega_uart *hw_uart = get_instance(0);
+    init_uart(&uart);
     while(1)
     {
-        hw_uart->put_char('a');
+        put_char('a');
     }
     return 0;
 }
